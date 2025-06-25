@@ -1,0 +1,14 @@
+
+
+***************Mean result of 1times runs ********************
+List of OA:[np.float64(0.9440016633169311)]
+List of AA:[np.float64(0.9522818804215236)]
+List of KPP:[np.float64(0.9428571428571428)]
+OA=94.4+-0.0
+AA=95.23+-0.0
+Kpp=94.29+-0.0
+Acc per class=
+[ 90.75  94.73 100.    95.35 100.   100.    99.59  78.65  88.53  97.73
+  98.41  92.12  94.17 100.    98.39]+-[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]
+Average training time=nan+-nan
+Average testing time=1147.96+-0.0
