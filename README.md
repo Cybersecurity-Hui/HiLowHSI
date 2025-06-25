@@ -26,32 +26,8 @@ HiLoHSI is a novel dual-path general framework for lightweight hyperspectral ima
 #### Ablation Experiment:
 ![image](./Result-Ablation-Experiment.png)
 
-Quantitative metrics (OA, AA, Kappa)
 
-Visualization of classification maps
+### ✨ Complexity
+![image](./Complexity.png)
 
-Speed vs. accuracy comparisons
 
-Ablation studies on quantization
-
-Results Preview:
-
-https://media/image2.png	https://media/image3.png
-https://media/image4.png	https://media/image5.png
-✨ Core Advantages
-Lightweight: INT8 quantization reduces model size by 4×.
-
-Flexible: Plug-and-play support for mainstream backbones.
-
-Effective: Maintains >99% accuracy after quantization.
-
-💡 Citation
-If this work aids your research, please cite:
-
-latex
-@article{hilohsi2024,  
-  title={HiLoHSI: Efficient HSI Classification via High-Low Frequency Hybrid Quantization},  
-  author={Anonymous},  
-  journal={Submitted},  
-  year={2024}  
-}  
