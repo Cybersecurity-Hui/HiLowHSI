@@ -3,7 +3,7 @@
 HiLoHSI is a novel dual-path general framework for lightweight hyperspectral image (HSI) classification. It innovatively combines high-low frequency decoupling and hybrid quantization to reduce overhead while ensuring accuracy.
 
 Framework Overview:
-[https://media/image1.png](https://github.com/Cybersecurity-Hui/HiLowHSI/blob/main/Overall%20Framework.png)
+![image](./Overall Framework.png)
 *Fig. 1: Dual-path architecture of HiLoHSI*
 
 📊 Experimental Results
