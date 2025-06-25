@@ -1,0 +1,2 @@
+INT8+FP16文件为两个实验的合并，单独使用INT8卷积将有关Mamba部分FP16权重的代码注释即可
+其中消融实验需要手动更改pytorch的Mamba源代码量化Mamba
