@@ -1,0 +1,164 @@
+[I 250429 05:49:13 3136068103:21] ./mamba_in_proj_int8/MambaHSI/UP
+[I 250429 05:49:16 3136068103:77] {'net_name': 'MambaHSI', 'dataset_index': 0, 'num_list': [30, 10], 'lr': 0.0003, 'seed_list': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]}
+[I 250429 05:49:16 3136068103:78] MambaHSI_NEW(
+      (quant): QuantStub()
+      (dequant): DeQuantStub()
+      (patch_embedding): Sequential(
+        (0): Conv2d(103, 128, kernel_size=(1, 1), stride=(1, 1))
+        (1): GroupNorm(4, 128, eps=1e-05, affine=True)
+        (2): SiLU()
+      )
+      (high_channel_128_32): Sequential(
+        (0): Conv2d(128, 32, kernel_size=(1, 1), stride=(1, 1))
+        (1): GroupNorm(4, 32, eps=1e-05, affine=True)
+        (2): SiLU()
+      )
+      (high_channel_160_32): Sequential(
+        (0): Conv2d(160, 32, kernel_size=(1, 1), stride=(1, 1))
+        (1): GroupNorm(4, 32, eps=1e-05, affine=True)
+        (2): SiLU()
+      )
+      (low_channel_160_128): HalfPrecisionConv(160, 128, kernel_size=(1, 1), stride=(1, 1))
+      (low_channel_160_128_fin): Sequential(
+        (0): GroupNorm(4, 128, eps=1e-05, affine=True)
+        (1): SiLU()
+      )
+      (low_channel_128_128): HalfPrecisionConv(128, 128, kernel_size=(1, 1), stride=(1, 1))
+      (low_channel_128_128_fin): Sequential(
+        (0): GroupNorm(4, 128, eps=1e-05, affine=True)
+        (1): SiLU()
+        (2): AvgPool2d(kernel_size=2, stride=2, padding=0)
+      )
+      (decomp): SpectralDecomp(
+        (gaussian_blur): Sequential(
+          (0): ReflectionPad2d((7, 7, 7, 7))
+          (1): Conv2d(1, 1, kernel_size=(15, 15), stride=(1, 1), bias=False)
+        )
+      )
+      (high_mamba): Sequential(
+        (0): BothMamba(
+          (softmax): Softmax(dim=0)
+          (spa_mamba): SpaMamba(
+            (mamba): Mamba(
+              (in_proj): Linear(
+                in_features=32, out_features=128, bias=False
+                (weight_fake_quant): MinMaxObserver(min_val=inf, max_val=-inf)
+                (activation_post_process): MovingAverageMinMaxObserver(min_val=inf, max_val=-inf)
+              )
+              (conv1d): Conv1d(64, 64, kernel_size=(4,), stride=(1,), padding=(3,), groups=64)
+              (quant): QuantStub(
+                (activation_post_process): MovingAverageMinMaxObserver(min_val=inf, max_val=-inf)
+              )
+              (dequant): DeQuantStub()
+              (act): SiLU()
+              (x_proj): Linear(in_features=64, out_features=34, bias=False)
+              (dt_proj): Linear(in_features=2, out_features=64, bias=True)
+              (out_proj): Linear(in_features=64, out_features=32, bias=False)
+            )
+            (proj): Sequential(
+              (0): GroupNorm(4, 32, eps=1e-05, affine=True)
+              (1): SiLU()
+            )
+          )
+          (spe_mamba): SpeMamba(
+            (mamba): Mamba(
+              (in_proj): Linear(
+                in_features=8, out_features=32, bias=False
+                (weight_fake_quant): MinMaxObserver(min_val=inf, max_val=-inf)
+                (activation_post_process): MovingAverageMinMaxObserver(min_val=inf, max_val=-inf)
+              )
+              (conv1d): Conv1d(16, 16, kernel_size=(4,), stride=(1,), padding=(3,), groups=16)
+              (quant): QuantStub(
+                (activation_post_process): MovingAverageMinMaxObserver(min_val=inf, max_val=-inf)
+              )
+              (dequant): DeQuantStub()
+              (act): SiLU()
+              (x_proj): Linear(in_features=16, out_features=33, bias=False)
+              (dt_proj): Linear(in_features=1, out_features=16, bias=True)
+              (out_proj): Linear(in_features=16, out_features=8, bias=False)
+            )
+            (proj): Sequential(
+              (0): GroupNorm(4, 32, eps=1e-05, affine=True)
+              (1): SiLU()
+            )
+          )
+        )
+        (1): AvgPool2d(kernel_size=2, stride=2, padding=0)
+      )
+      (high_mamba_finally): BothMamba(
+        (softmax): Softmax(dim=0)
+        (spa_mamba): SpaMamba(
+          (mamba): Mamba(
+            (in_proj): Linear(in_features=32, out_features=128, bias=False)
+            (conv1d): Conv1d(64, 64, kernel_size=(4,), stride=(1,), padding=(3,), groups=64)
+            (quant): QuantStub()
+            (dequant): DeQuantStub()
+            (act): SiLU()
+            (x_proj): Linear(in_features=64, out_features=34, bias=False)
+            (dt_proj): Linear(in_features=2, out_features=64, bias=True)
+            (out_proj): Linear(in_features=64, out_features=32, bias=False)
+          )
+          (proj): Sequential(
+            (0): GroupNorm(4, 32, eps=1e-05, affine=True)
+            (1): SiLU()
+          )
+        )
+        (spe_mamba): SpeMamba(
+          (mamba): Mamba(
+            (in_proj): Linear(in_features=8, out_features=32, bias=False)
+            (conv1d): Conv1d(16, 16, kernel_size=(4,), stride=(1,), padding=(3,), groups=16)
+            (quant): QuantStub()
+            (dequant): DeQuantStub()
+            (act): SiLU()
+            (x_proj): Linear(in_features=16, out_features=33, bias=False)
+            (dt_proj): Linear(in_features=1, out_features=16, bias=True)
+            (out_proj): Linear(in_features=16, out_features=8, bias=False)
+          )
+          (proj): Sequential(
+            (0): GroupNorm(4, 32, eps=1e-05, affine=True)
+            (1): SiLU()
+          )
+        )
+      )
+      (low_mamba_finally): BothMamba(
+        (softmax): Softmax(dim=0)
+        (spa_mamba): SpaMamba(
+          (mamba): Mamba(
+            (in_proj): Linear(in_features=128, out_features=512, bias=False)
+            (conv1d): Conv1d(256, 256, kernel_size=(4,), stride=(1,), padding=(3,), groups=256)
+            (quant): QuantStub()
+            (dequant): DeQuantStub()
+            (act): SiLU()
+            (x_proj): Linear(in_features=256, out_features=40, bias=False)
+            (dt_proj): Linear(in_features=8, out_features=256, bias=True)
+            (out_proj): Linear(in_features=256, out_features=128, bias=False)
+          )
+          (proj): Sequential(
+            (0): GroupNorm(4, 128, eps=1e-05, affine=True)
+            (1): SiLU()
+          )
+        )
+        (spe_mamba): SpeMamba(
+          (mamba): Mamba(
+            (in_proj): Linear(in_features=32, out_features=128, bias=False)
+            (conv1d): Conv1d(64, 64, kernel_size=(4,), stride=(1,), padding=(3,), groups=64)
+            (quant): QuantStub()
+            (dequant): DeQuantStub()
+            (act): SiLU()
+            (x_proj): Linear(in_features=64, out_features=34, bias=False)
+            (dt_proj): Linear(in_features=2, out_features=64, bias=True)
+            (out_proj): Linear(in_features=64, out_features=32, bias=False)
+          )
+          (proj): Sequential(
+            (0): GroupNorm(4, 128, eps=1e-05, affine=True)
+            (1): SiLU()
+          )
+        )
+      )
+      (cls_head): Sequential(
+        (0): Conv2d(160, 64, kernel_size=(1, 1), stride=(1, 1))
+        (1): GroupNorm(4, 64, eps=1e-05, affine=True)
+        (2): SiLU()
+        (3): Conv2d(64, 9, kernel_size=(1, 1), stride=(1, 1))
+      )
+    )
