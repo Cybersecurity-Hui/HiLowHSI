@@ -18,7 +18,13 @@ HiLoHSI is a novel dual-path general framework for lightweight hyperspectral ima
 
 ### 📊 Experimental Results：
 #### Mamba-Base:
-
+![image](./Result-Mamba-Base.png)
+#### Transformer-Base:
+![image](./Result-Transformer-Base.png)
+#### Other Quantitative Methods:
+![image](./Result-Bin-Conv.png)
+#### Ablation Experiment:
+![image](./Result-Ablation-Experiment.png)
 
 Quantitative metrics (OA, AA, Kappa)
 
